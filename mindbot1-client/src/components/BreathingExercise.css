@@ -1,0 +1,22 @@
+.breathing-box {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.circle {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  background-color: #88f;
+  border-radius: 50%;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+}
