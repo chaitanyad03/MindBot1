@@ -6,15 +6,13 @@ app = Flask(__name__)
 CORS(app, supports_credentials=True, origins=[
     "http://localhost:3000", 
     "http://127.0.0.1:3000",
-    "https://your-frontend-url.netlify.app"  # Optional: Add your Netlify URL here
+    "https://mindbot1cd.netlify.app"  
 ])
 
-# ✅ Add a home route to test if the backend is live
 @app.route("/")
 def home():
     return "MindBot backend is live!"
 
-# Sample interventions
 motivational_quotes = [
     "Believe you can and you're halfway there.",
     "You are stronger than you think.",
