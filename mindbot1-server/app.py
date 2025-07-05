@@ -3,7 +3,16 @@ from flask_cors import CORS
 import random
 
 app = Flask(__name__)
-CORS(app, supports_credentials=True, origins=["http://localhost:3000", "http://127.0.0.1:3000"])
+CORS(app, supports_credentials=True, origins=[
+    "http://localhost:3000", 
+    "http://127.0.0.1:3000",
+    "https://your-frontend-url.netlify.app"  # Optional: Add your Netlify URL here
+])
+
+# ✅ Add a home route to test if the backend is live
+@app.route("/")
+def home():
+    return "MindBot backend is live!"
 
 # Sample interventions
 motivational_quotes = [
@@ -28,7 +37,7 @@ def chat():
     detected_emotion = detect_emotion(message)
 
     suggestion = ""
-    follow_up = ""
+    follow_up = {}
 
     if context == "home":
         suggestion = "You're at home — maybe try a short meditation session? 🧘"
@@ -53,7 +62,7 @@ def chat():
             "message": random.choice(motivational_quotes)
         }
 
-    bot_reply = f"You said: \"{message}\". I sense you're feeling {detected_emotion}. {suggestion}"
+    bot_reply = f'You said: "{message}". I sense you\'re feeling {detected_emotion}. {suggestion}'
 
     return jsonify({
         "bot_reply": bot_reply,
@@ -80,5 +89,4 @@ def detect_emotion(message):
     else:
         return "neutral"
 
-if __name__ == '__main__':
-    app.run(debug=True, host="127.0.0.1")
+
